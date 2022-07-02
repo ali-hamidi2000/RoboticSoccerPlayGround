@@ -1,5 +1,5 @@
-# Robotic-playground
-robotic playground with robocup rules
+# Robotic Playground
+Robotic playground with Humanoid Robocup Rules
 
 # Welcome to Tool-Task! 👋🏻
 
