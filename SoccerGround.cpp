@@ -12,7 +12,6 @@ int main() {
     // make a window
     Mat Ground(windowWidth, windowLength, CV_8UC3, Scalar(0,50,0));
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Draw the rectangle from point to point (A to B to C to D)
     //-----------------playGround-----------------
     Point pointA(borderStripWidth, borderStripWidth); //playGround-LeftUP
@@ -28,8 +27,7 @@ int main() {
     Point pointMiddlelineA(borderStripWidth + fieldLength/2, borderStripWidth);
     Point pointMiddlelineB(borderStripWidth + fieldLength/2, borderStripWidth + fieldWidth);
     line(Ground, pointMiddlelineA, pointMiddlelineB, Scalar(255, 255, 255), 2, 8, 0);
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/
     //-----------------centerCircle-----------------
 	Point centerCircle(borderStripWidth+fieldLength/2,borderStripWidth+fieldWidth/2);
 	circle(Ground, centerCircle, radius, Scalar(255, 255, 255), 2, 8, 0);
@@ -38,8 +36,6 @@ int main() {
 	Point centerCircleBold(borderStripWidth+fieldLength/2,borderStripWidth+fieldWidth/2);
 	circle(Ground, centerCircleBold, penaltyRadius, Scalar(255, 255, 255), -1, 8, 0);
     
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //-----------------Penalty Mark Distance Left----------------
     Point PenaltyMarkDistanceLeft(borderStripWidth + penaltyMarkDistance, (borderStripWidth + fieldWidth/2));
 	circle(Ground, PenaltyMarkDistanceLeft, penaltyRadius, Scalar(255, 255, 255), -1, 8, 0);
@@ -47,9 +43,6 @@ int main() {
     //-----------------Penalty Mark Distance Right---------------
     Point PenaltyMarkDistanceRight(borderStripWidth + fieldLength - penaltyMarkDistance, (borderStripWidth + fieldWidth/2));
 	circle(Ground, PenaltyMarkDistanceRight, penaltyRadius, Scalar(255, 255, 255), -1, 8, 0);
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //-----------------PenaltyAreaLengthUp---------------
     Point pointPenaltyAreaLengthUpA(borderStripWidth, borderStripWidth + (fieldWidth/2 - penaltyAreaWidth/2));
@@ -81,8 +74,6 @@ int main() {
     Point pointGoalAreaLengthUpRightB(borderStripWidth + fieldLength -  penaltyAreaLength, borderStripWidth + (fieldWidth/2 - penaltyAreaWidth/2));
     line(Ground, pointGoalAreaLengthUpRightA, pointGoalAreaLengthUpRightB, Scalar(255, 255, 255), 2, 8, 0);
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     //-----------------GoalDepthLeft-----------------
     Point pointGDA(borderStripWidth - goalDepth, borderStripWidth + fieldWidth/2 - goalWidth/2);
     Point pointGDB(borderStripWidth - goalDepth, borderStripWidth + fieldWidth/2 + goalWidth/2);
@@ -97,11 +88,7 @@ int main() {
     Point pointGDDA(borderStripWidth - goalDepth, borderStripWidth + fieldWidth/2 + goalWidth/2);
     Point pointGDDB(borderStripWidth, borderStripWidth + fieldWidth/2 + goalWidth/2);
     line(Ground, pointGDDA, pointGDDB, Scalar(0, 255, 255), 2, 8, 0);
-
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+	
     //-----------------GoalDepthRight-----------------
     Point pointGDRA(borderStripWidth + fieldLength + goalDepth, borderStripWidth + fieldWidth/2 - goalWidth/2);
     Point pointGDRB(borderStripWidth + fieldLength + goalDepth, borderStripWidth + fieldWidth/2 + goalWidth/2);
@@ -116,12 +103,6 @@ int main() {
     Point pointGDRDA(borderStripWidth + fieldLength + goalDepth, borderStripWidth + fieldWidth/2 + goalWidth/2);
     Point pointGDRDB(borderStripWidth + fieldLength, borderStripWidth + fieldWidth/2 + goalWidth/2);
     line(Ground, pointGDRDA, pointGDRDB, Scalar(255, 255, 0), 2, 8, 0);
-
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
     //-----------------PenaltyAreaLengthUp---------------
     Point pointPenaltyAreaLengthUpAA(borderStripWidth, borderStripWidth + (fieldWidth/2 - goalAreaWidth/2));
@@ -163,7 +144,7 @@ int main() {
     Point pointDirectionB(borderStripWidth + fieldLength/2 - (2*robotSize), borderStripWidth + fieldWidth/2 -(2*robotSize));
     line(Ground, pointDirectionA, pointDirectionB, Scalar(255, 0, 255), 2, 8, 0);
     */
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
     //------Check Empty & Show Finaly----
     if (Ground.empty()) 
     {
@@ -178,15 +159,15 @@ int main() {
 }
 //---------------Humanoid robocup fild rules---------------
 void initialize() {
-    fieldWidth = 6 * meter2Pixel; // line 13
-    fieldLength = 9 * meter2Pixel; // line 13
-    goalDepth = 0.6 * meter2Pixel; // line 27
-    goalWidth = 2.6 * meter2Pixel; // line 
-    goalHeight = 1.2 * meter2Pixel; // line
-    goalAreaLength = 1 * meter2Pixel; // line
-    goalAreaWidth = 3 * meter2Pixel; // line 
-    penaltyMarkDistance = 1.5 * meter2Pixel; // line 
-    centerCircleDiameter = 1.5 * meter2Pixel; // line 
+    fieldWidth = 6 * meter2Pixel;
+    fieldLength = 9 * meter2Pixel;
+    goalDepth = 0.6 * meter2Pixel;
+    goalWidth = 2.6 * meter2Pixel;
+    goalHeight = 1.2 * meter2Pixel;
+    goalAreaLength = 1 * meter2Pixel;
+    goalAreaWidth = 3 * meter2Pixel;
+    penaltyMarkDistance = 1.5 * meter2Pixel;
+    centerCircleDiameter = 1.5 * meter2Pixel;
     borderStripWidth = 1 * meter2Pixel;
     penaltyAreaLength = 2 * meter2Pixel;
     penaltyAreaWidth = 5 * meter2Pixel;
@@ -195,4 +176,24 @@ void initialize() {
     radius = 1.5/2 * meter2Pixel;
     penaltyRadius = 0.075 * meter2Pixel;
     robotSize = 0.27 * meter2Pixel;
+    /*
+    //-----------------Adult robot proportions---------------
+	fieldWidth = 14 * meter2Pixel;
+    fieldLength = 9 * meter2Pixel;
+    goalDepth = 0.6 * meter2Pixel;
+    goalWidth = 2.6 * meter2Pixel;
+    goalHeight = 1.8 * meter2Pixel;
+    goalAreaLength = 1 * meter2Pixel;
+    goalAreaWidth = 4 * meter2Pixel;
+    penaltyMarkDistance = 2.1 * meter2Pixel;
+    centerCircleDiameter = 3 * meter2Pixel;
+    borderStripWidth = 1 * meter2Pixel;
+    penaltyAreaLength = 3 * meter2Pixel;
+    penaltyAreaWidth = 6 * meter2Pixel;
+    windowWidth = fieldWidth + 2 * borderStripWidth;
+    windowLength = fieldLength + 2 * borderStripWidth;
+    radius = 1.5/2 * meter2Pixel;
+    penaltyRadius = 0.075 * meter2Pixel;
+    robotSize = 0.27 * meter2Pixel;
+    */
 }
