@@ -171,7 +171,7 @@ After all of that you should see something like this:
 <a href="https://github.com/Awrsha"><img src="https://avatars.githubusercontent.com/u/89135083?v=4" width="100;" alt="Awrsha Parvizi"/><br /><sub><b>.:: Amir M. Parvizi ::.</b></sub></a>
 </p>
 <p align="center">
-<a href="https://github.com/"><img src="" width="100;" alt="Sheikh Ahmadi"/><br /><sub><b>.:: Mohammad Reza Sheikh Ahmadi ::.</b></sub></a>
+<a href="https://github.com/mahan1379"><img src="" width="100;" alt="Sheikh Ahmadi"/><br /><sub><b>.:: Mohammad Reza Sheikh Ahmadi ::.</b></sub></a>
 </p>
 
 ## System & Hardware 🛠  
