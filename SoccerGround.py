@@ -2,6 +2,7 @@ import cv2 # pip install opencv-python
 import numpy as np # pip install numpy
 
 meter2Pixel = 100
+
 #-----------------KidSize robot proportions---------------
 fieldLength = 9 * meter2Pixel
 fieldWidth = 6 * meter2Pixel
@@ -18,14 +19,35 @@ penaltyAreaWidth = 5 * meter2Pixel
 
 windowWidth = fieldWidth + 2 * borderStripWidth
 windowLength = fieldLength + 2 * borderStripWidth
-penaltyRadius = 0.075 * meter2Pixel
-robotSize = 0.27 * meter2Pixel
-radius = 1.5 / 2 * meter2Pixel
+penaltyRadius = int(0.075 * meter2Pixel)
+robotSize = int(0.27 * meter2Pixel)
+radius = int(1.5 / 2 * meter2Pixel)
+'''
+#-----------------Adult robot proportions---------------
+fieldLength = 14 * meter2Pixel
+fieldWidth = 9 * meter2Pixel
+goalDepth = 0.6 * meter2Pixel
+goalWidth = 2.6 * meter2Pixel
+goalHeight = 1.8 * meter2Pixel
+goalAreaLength = 1 * meter2Pixel
+goalAreaWidth = 4 * meter2Pixel
+penaltyMarkDistance = 2.1 * meter2Pixel
+centerCircleDiameter = 3 * meter2Pixel
+borderStripWidth = 1 * meter2Pixel
+penaltyAreaLength = 3 * meter2Pixel
+penaltyAreaWidth = 6 * meter2Pixel
 
+windowWidth = fieldWidth + 2 * borderStripWidth
+windowLength = fieldLength + 2 * borderStripWidth
+penaltyRadius = int(0.075 * meter2Pixel)
+robotSize = int(0.27 * meter2Pixel)
+radius = int(1.5 / 2 * meter2Pixel)
+'''
 
 
 #-----------------Create a empty green Ground---------------
 Ground = np.zeros((windowWidth, windowLength, 3), np.uint8)
+
 Ground[:] = (0, 150, 0)
 
 # Points corresponding to the quadrant of the Ground
@@ -116,47 +138,57 @@ pointGoalAreaWidthRightA = (borderStripWidth + fieldLength - goalAreaLength, bor
 pointGoalAreaWidthRightB = (borderStripWidth + fieldLength -goalAreaLength, borderStripWidth + (fieldWidth//2 + goalAreaWidth//2))
 cv2.line(Ground, pointGoalAreaWidthRightA, pointGoalAreaWidthRightB, (255, 255, 255), 2, 8, 0)
 
-'''
-#-----------------centerCircle-----------------
-centerCircle = (borderStripWidth+fieldLength//2, borderStripWidth+fieldWidth//2)
-cv2.circle(Ground, centerCircle, radius, (255, 255, 255), 2, 8, 0)
-#-----------------centerCircle-----------------
-centerCircleBold = (borderStripWidth+fieldLength//2, borderStripWidth+fieldWidth//2)
-cv2.circle(Ground, centerCircleBold, penaltyRadius, (255, 255, 255), -1, 8, 0)
-#-----------------Penalty Mark Distance Left----------------
-PenaltyMarkDistanceLeft = (borderStripWidth + penaltyMarkDistance, (borderStripWidth + fieldWidth//2))
+
+#-----------------Center Circle Diameter------------
+CenterCircleDiameter = (borderStripWidth+fieldLength//2, borderStripWidth+fieldWidth//2)
+cv2.circle(Ground, CenterCircleDiameter, radius, (255, 255, 255), 2, 8, 0)
+
+#-----------------Start Match Circle-----------------
+StartMatchCircle = (borderStripWidth+fieldLength//2, borderStripWidth+fieldWidth//2)
+cv2.circle(Ground, StartMatchCircle, penaltyRadius, (255, 255, 255), -1, 8, 0)
+
+#-----------------Penalty Mark Distance Left---------
+PenaltyMarkDistanceLeft = (int(borderStripWidth + penaltyMarkDistance), (borderStripWidth + fieldWidth//2))
 cv2.circle(Ground, PenaltyMarkDistanceLeft, penaltyRadius, (255, 255, 255), -1, 8, 0)
-#-----------------Penalty Mark Distance Right---------------
-PenaltyMarkDistanceRight = (borderStripWidth + fieldLength - penaltyMarkDistance, (borderStripWidth + fieldWidth//2))
+
+#-----------------Penalty Mark Distance Right--------
+PenaltyMarkDistanceRight = (int(borderStripWidth + fieldLength - penaltyMarkDistance), (borderStripWidth + fieldWidth//2))
 cv2.circle(Ground, PenaltyMarkDistanceRight, penaltyRadius, (255, 255, 255), -1, 8, 0)
-#-----------------GoalDepthLeft-----------------
-pointGDA = (borderStripWidth - goalDepth, borderStripWidth + fieldWidth//2 - goalWidth//2)
-pointGDB = (borderStripWidth - goalDepth, borderStripWidth + fieldWidth//2 + goalWidth//2)
-cv2.line(Ground, pointGDA, pointGDB, (0, 255, 255), 2, 8, 0)
-#-----------------GoalDepthUP-----------------
-pointGDUA = (borderStripWidth - goalDepth, borderStripWidth + fieldWidth//2 - goalWidth//2)
-pointGDUB = (borderStripWidth, borderStripWidth + fieldWidth//2 - goalWidth//2)
-cv2.line(Ground, pointGDUA, pointGDUB, (0, 255, 255), 2, 8, 0)
-#-----------------GoalDepthDown-----------------
-pointGDDA = (borderStripWidth - goalDepth, borderStripWidth + fieldWidth//2 + goalWidth//2)
-pointGDDB = (borderStripWidth, borderStripWidth + fieldWidth//2 + goalWidth//2)
-cv2.line(Ground, pointGDDA, pointGDDB, (0, 255, 255), 2, 8, 0)
-#-----------------GoalDepthRight-----------------
-pointGDRA = (borderStripWidth + fieldLength + goalDepth, borderStripWidth + fieldWidth//2 - goalWidth//2)
-pointGDRB = (borderStripWidth + fieldLength + goalDepth, borderStripWidth + fieldWidth//2 + goalWidth//2)
-cv2.line(Ground, pointGDRA, pointGDRB, (255, 255, 0), 2, 8, 0)
-#-----------------GoalDepthUP-----------------
-pointGDRUA = (borderStripWidth + fieldLength + goalDepth, borderStripWidth + fieldWidth//2 - goalWidth//2)
-pointGDRUB = (borderStripWidth + fieldLength, borderStripWidth + fieldWidth//2 - goalWidth//2)
-cv2.line(Ground, pointGDRUA, pointGDRUB, (255, 255, 0), 2, 8, 0)
-#-----------------GoalDepthDown-----------------
-pointGDRDA = (borderStripWidth + fieldLength + goalDepth, borderStripWidth + fieldWidth//2 + goalWidth//2)
-pointGDRDB = (borderStripWidth + fieldLength, borderStripWidth + fieldWidth//2 + goalWidth//2)
-cv2.line(Ground, pointGDRDA, pointGDRDB, (255, 255, 0), 2, 8, 0)
+
+#-----------------Goal Width Left--------------------
+pointGoalWidthLeftA = (int(borderStripWidth - goalDepth), int(borderStripWidth + fieldWidth//2 - goalWidth//2))
+pointGoalWidthLeftB = (int(borderStripWidth - goalDepth), int(borderStripWidth + fieldWidth//2 + goalWidth//2))
+cv2.line(Ground, pointGoalWidthLeftA, pointGoalWidthLeftB, (0, 255, 255), 2, 8, 0)
+
+#-----------------Goal Depth Left UP-----------------
+pointGoalDepthLeftUPA = (int(borderStripWidth - goalDepth),int(borderStripWidth + fieldWidth//2 - goalWidth//2))
+pointGoalDepthLeftUPB = (int(borderStripWidth), int(borderStripWidth + fieldWidth//2 - goalWidth//2))
+cv2.line(Ground, pointGoalDepthLeftUPA, pointGoalDepthLeftUPB, (0, 255, 255), 2, 8, 0)
+
+#-----------------Goal Depth Left Down---------------
+pointGoalDepthLeftDownA = (int(borderStripWidth - goalDepth), int(borderStripWidth + fieldWidth//2 + goalWidth//2))
+pointGoalDepthLeftDownB = (int(borderStripWidth), int(borderStripWidth + fieldWidth//2 + goalWidth//2))
+cv2.line(Ground, pointGoalDepthLeftDownA, pointGoalDepthLeftDownB, (0, 255, 255), 2, 8, 0)
+
+#-----------------Goal Width Right-------------------
+pointGoalWidthRightA = (int(borderStripWidth + fieldLength + goalDepth), int(borderStripWidth + fieldWidth//2 - goalWidth//2))
+pointGoalWidthRightB = (int(borderStripWidth + fieldLength + goalDepth), int(borderStripWidth + fieldWidth//2 + goalWidth//2))
+cv2.line(Ground, pointGoalWidthRightA, pointGoalWidthRightB, (255, 255, 0), 2, 8, 0)
+
+#-----------------Goal Depth Right UP----------------
+GoalDepthRightUPA = (int(borderStripWidth + fieldLength + goalDepth), int(borderStripWidth + fieldWidth//2 - goalWidth//2))
+GoalDepthRightUPB = (int(borderStripWidth + fieldLength), int(borderStripWidth + fieldWidth//2 - goalWidth//2))
+cv2.line(Ground, GoalDepthRightUPA, GoalDepthRightUPB, (255, 255, 0), 2, 8, 0)
+#-----------------Goal Depth Right Down--------------
+GoalDepthRightDownA = (int(borderStripWidth + fieldLength + goalDepth), int(borderStripWidth + fieldWidth//2 + goalWidth//2))
+GoalDepthRightDownB = (int(borderStripWidth + fieldLength), int(borderStripWidth + fieldWidth//2 + goalWidth//2))
+cv2.line(Ground, GoalDepthRightDownA, GoalDepthRightDownB, (255, 255, 0), 2, 8, 0)
+
+'''
 #----------------Robot--------------
 robot = (borderStripWidth+fieldLength//2,borderStripWidth+fieldWidth//2)
 cv2.circle(Ground, robot, robotSize, (255, 0, 255), 2, 8, 0)
-
+#----------------Direction----------
 pointDirectionA = (borderStripWidth + fieldLength//2,borderStripWidth + fieldWidth//2)
 pointDirectionB = (borderStripWidth + fieldLength//2 - (2*robotSize), borderStripWidth + fieldWidth//2 -(2*robotSize))
 cv2.line(Ground, pointDirectionA, pointDirectionB, (255, 0, 255), 2, 8, 0)
